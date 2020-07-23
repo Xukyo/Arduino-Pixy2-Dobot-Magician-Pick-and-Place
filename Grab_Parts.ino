@@ -221,9 +221,9 @@ uint64_t gQueuedCmdIndex;
 Pixy2 pixy;
 
 void setup() {  
-Serial.println(" ");
-Serial.println("===========Startup sequence, read settings from EEPROM=================");
-Serial.println(" ");
+Serial.println(F(" "));
+Serial.println(F("===========Startup sequence, read settings from EEPROM================="));
+Serial.println(F(" "));
 // **** setup miscellaneous ********************************** 
     Serial.begin(115200);
     Serial1.begin(115200); 
@@ -236,67 +236,67 @@ Serial.println(" ");
 // In this section previously stored data is retrieved from the EEPROM if available. If data is not available nothing will be done or a default value will be used
 
 EEPROM.get(eeAddressStartPosAvailable, eePromIntVar);
-  if (eePromIntVar != 999) {startPosX = 200.00; startPosY = 0.00; startPosZ = 0.00; startPosR = 0.00; Serial.println("Start position NOT previously saved, using default values:");
-     Serial.print(" X"); Serial.print(startPosX); Serial.print(" Y"); Serial.print(startPosY); Serial.print(" Z"); Serial.print(startPosZ); Serial.print(" R"); Serial.println(startPosR);}
+  if (eePromIntVar != 999) {startPosX = 200.00; startPosY = 0.00; startPosZ = 0.00; startPosR = 0.00; Serial.println(F("Start position NOT previously saved, using default values:"));
+     Serial.print(F(" X")); Serial.print(startPosX); Serial.print(F(" Y")); Serial.print(startPosY); Serial.print(F(" Z")); Serial.print(startPosZ); Serial.print(F(" R")); Serial.println(startPosR);}
   if (eePromIntVar == 999) {EEPROM.get(eeAddressStartPosX, startPosX); EEPROM.get(eeAddressStartPosY, startPosY); EEPROM.get(eeAddressStartPosZ, startPosZ); EEPROM.get(eeAddressStartPosR, startPosR); 
-     Serial.print("Start position read from EEPROM: X"); Serial.print(startPosX); Serial.print(" Y"); Serial.print(startPosY); Serial.print(" Z"); Serial.print(startPosZ); Serial.print(" R"); Serial.println(startPosR); }
+     Serial.print(F("Start position read from EEPROM: X")); Serial.print(startPosX); Serial.print(F(" Y")); Serial.print(startPosY); Serial.print(F(" Z")); Serial.print(startPosZ); Serial.print(F(" R")); Serial.println(startPosR); }
 
 EEPROM.get(eeAddressCalPosAvailable, eePromIntVar);
-  if (eePromIntVar != 999) {calXpos = 200.00; calYpos = -45.00; calZpos = 160.00; calRpos = 0.00; Serial.println("Calibration position NOT previously saved, using default values:");
-     Serial.print(" X"); Serial.print(calXpos); Serial.print(" Y"); Serial.print(calYpos); Serial.print(" Z"); Serial.print(calZpos); Serial.print(" R"); Serial.println(calRpos);}
+  if (eePromIntVar != 999) {calXpos = 200.00; calYpos = -45.00; calZpos = 160.00; calRpos = 0.00; Serial.println(F("Calibration position NOT previously saved, using default values:"));
+     Serial.print(F(" X")); Serial.print(calXpos); Serial.print(F(" Y")); Serial.print(calYpos); Serial.print(F(" Z")); Serial.print(calZpos); Serial.print(F(" R")); Serial.println(calRpos);}
   if (eePromIntVar == 999) {EEPROM.get(eeAddressCalXpos, calXpos); EEPROM.get(eeAddressCalYpos, calYpos); EEPROM.get(eeAddressCalZpos, calZpos); EEPROM.get(eeAddressCalRpos, calRpos); 
-     Serial.print("Calibration position read from EEPROM: X"); Serial.print(calXpos); Serial.print(" Y"); Serial.print(calYpos); Serial.print(" Z"); Serial.print(calZpos); Serial.print(" R"); Serial.println(calRpos); }
+     Serial.print(F("Calibration position read from EEPROM: X")); Serial.print(calXpos); Serial.print(F(" Y")); Serial.print(calYpos); Serial.print(F(" Z")); Serial.print(calZpos); Serial.print(F(" R")); Serial.println(calRpos); }
 
 EEPROM.get(eeAddressA1Available, eePromIntVar);
-  if (eePromIntVar != 999) {a1X = 0.00; a1Y = 0.00; Serial.println("A1 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(a1X); Serial.print(" Y"); Serial.print(a1Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressA1x, a1X); EEPROM.get(eeAddressA1y, a1Y); Serial.print("A1 Calibration position read from EEPROM: X"); Serial.print(a1X); Serial.print(" Y"); Serial.println(a1Y); }
+  if (eePromIntVar != 999) {a1X = 0.00; a1Y = 0.00; Serial.println(F("A1 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(a1X); Serial.print(F(" Y")); Serial.print(a1Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressA1x, a1X); EEPROM.get(eeAddressA1y, a1Y); Serial.print(F("A1 Calibration position read from EEPROM: X")); Serial.print(a1X); Serial.print(F(" Y")); Serial.println(a1Y); }
 
 EEPROM.get(eeAddressB1Available, eePromIntVar);
-  if (eePromIntVar != 999) {b1X = 0.00; a1Y = 0.00; Serial.println("B1 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(b1X); Serial.print(" Y"); Serial.print(b1Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressB1x, b1X); EEPROM.get(eeAddressB1y, b1Y); Serial.print("B1 Calibration position read from EEPROM: X"); Serial.print(b1X); Serial.print(" Y"); Serial.println(b1Y); }
+  if (eePromIntVar != 999) {b1X = 0.00; a1Y = 0.00; Serial.println(F("B1 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(b1X); Serial.print(F(" Y")); Serial.print(b1Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressB1x, b1X); EEPROM.get(eeAddressB1y, b1Y); Serial.print(F("B1 Calibration position read from EEPROM: X")); Serial.print(b1X); Serial.print(F(" Y")); Serial.println(b1Y); }
 
 EEPROM.get(eeAddressC1Available, eePromIntVar);
-  if (eePromIntVar != 999) {c1X = 0.00; c1Y = 0.00; Serial.println("C1 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(c1X); Serial.print(" Y"); Serial.print(c1Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressC1x, c1X); EEPROM.get(eeAddressC1y, c1Y); Serial.print("C1 Calibration position read from EEPROM: X"); Serial.print(c1X); Serial.print(" Y"); Serial.println(c1Y); }
+  if (eePromIntVar != 999) {c1X = 0.00; c1Y = 0.00; Serial.println(F("C1 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(c1X); Serial.print(F(" Y")); Serial.print(c1Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressC1x, c1X); EEPROM.get(eeAddressC1y, c1Y); Serial.print(F("C1 Calibration position read from EEPROM: X")); Serial.print(c1X); Serial.print(F(" Y")); Serial.println(c1Y); }
 
 EEPROM.get(eeAddressA2Available, eePromIntVar);
-  if (eePromIntVar != 999) {a2X = 200.00; a2Y = -50; Serial.println("A2 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(a2X); Serial.print(" Y"); Serial.print(a2Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressA2x, a2X); EEPROM.get(eeAddressA2y, a2Y); Serial.print("A2 Calibration position read from EEPROM: X"); Serial.print(a2X); Serial.print(" Y"); Serial.println(a2Y); }
+  if (eePromIntVar != 999) {a2X = 200.00; a2Y = -50; Serial.println(F("A2 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(a2X); Serial.print(F(" Y")); Serial.print(a2Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressA2x, a2X); EEPROM.get(eeAddressA2y, a2Y); Serial.print(F("A2 Calibration position read from EEPROM: X")); Serial.print(a2X); Serial.print(F(" Y")); Serial.println(a2Y); }
 
 EEPROM.get(eeAddressB2Available, eePromIntVar);
-  if (eePromIntVar != 999) {b2X = 200.00; a2Y = 50; Serial.println("B2 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(b2X); Serial.print(" Y"); Serial.print(b2Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressB2x, b2X); EEPROM.get(eeAddressB2y, b2Y); Serial.print("B2 Calibration position read from EEPROM: X"); Serial.print(b2X); Serial.print(" Y"); Serial.println(b2Y); }
+  if (eePromIntVar != 999) {b2X = 200.00; a2Y = 50; Serial.println(F("B2 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(b2X); Serial.print(F(" Y")); Serial.print(b2Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressB2x, b2X); EEPROM.get(eeAddressB2y, b2Y); Serial.print(F("B2 Calibration position read from EEPROM: X")); Serial.print(b2X); Serial.print(F(" Y")); Serial.println(b2Y); }
 
 EEPROM.get(eeAddressC2Available, eePromIntVar);
-  if (eePromIntVar != 999) {c2X = 250.00; c2Y = -50; Serial.println("C2 calibration dot position NOT previously saved, using default values:"); Serial.print(" X"); Serial.print(c2X); Serial.print(" Y"); Serial.print(c2Y); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressC2x, c2X); EEPROM.get(eeAddressC2y, c2Y); Serial.print("C2 Calibration position read from EEPROM: X"); Serial.print(c2X); Serial.print(" Y"); Serial.println(c2Y); }
+  if (eePromIntVar != 999) {c2X = 250.00; c2Y = -50; Serial.println(F("C2 calibration dot position NOT previously saved, using default values:")); Serial.print(F(" X")); Serial.print(c2X); Serial.print(F(" Y")); Serial.print(c2Y); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressC2x, c2X); EEPROM.get(eeAddressC2y, c2Y); Serial.print(F("C2 Calibration position read from EEPROM: X")); Serial.print(c2X); Serial.print(F(" Y")); Serial.println(c2Y); }
 
 EEPROM.get(eeAddressZdownAvailable, eePromIntVar);
-  if (eePromIntVar != 999) {zDownPos = 0.00; Serial.print("Z-Down position NOT previously saved, using default values:"); Serial.print(" Z"); Serial.println(zDownPos); }
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressZdown, zDownPos); Serial.print("Z-Down position read from EEPROM: Z"); Serial.println(zDownPos); }
+  if (eePromIntVar != 999) {zDownPos = 0.00; Serial.print(F("Z-Down position NOT previously saved, using default values:")); Serial.print(F(" Z")); Serial.println(zDownPos); }
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressZdown, zDownPos); Serial.print(F("Z-Down position read from EEPROM: Z")); Serial.println(zDownPos); }
 
 EEPROM.get(eeAddressDropLocation1Available, eePromIntVar);
-  if (eePromIntVar != 999) {dropLocation1X = 220.00; dropLocation1Y = 120.00; dropLocation1Z = 50.00; dropLocation1R = 0.00; Serial.println("Drop position 1 NOT previously saved, using default values:");
-     Serial.print(" X"); Serial.print(dropLocation1X); Serial.print(" Y"); Serial.print(dropLocation1Y); Serial.print(" Z"); Serial.print(dropLocation1Z); Serial.print(" R"); Serial.println(dropLocation1R);}
+  if (eePromIntVar != 999) {dropLocation1X = 220.00; dropLocation1Y = 120.00; dropLocation1Z = 50.00; dropLocation1R = 0.00; Serial.println(F("Drop position 1 NOT previously saved, using default values:"));
+     Serial.print(F(" X")); Serial.print(dropLocation1X); Serial.print(F(" Y")); Serial.print(dropLocation1Y); Serial.print(F(" Z")); Serial.print(dropLocation1Z); Serial.print(F(" R")); Serial.println(dropLocation1R);}
   if (eePromIntVar == 999) {EEPROM.get(eeAddressDropLocation1X, dropLocation1X); EEPROM.get(eeAddressDropLocation1Y, dropLocation1Y); EEPROM.get(eeAddressDropLocation1Z, dropLocation1Z); EEPROM.get(eeAddressDropLocation1R, dropLocation1R); 
-     Serial.print("Drop location 1 read from EEPROM: X"); Serial.print(dropLocation1X); Serial.print(" Y"); Serial.print(dropLocation1Y); Serial.print(" Z"); Serial.print(dropLocation1Z); Serial.print(" R"); Serial.println(dropLocation1R); }
+     Serial.print(F("Drop location 1 read from EEPROM: X")); Serial.print(dropLocation1X); Serial.print(F(" Y")); Serial.print(dropLocation1Y); Serial.print(F(" Z")); Serial.print(dropLocation1Z); Serial.print(F(" R")); Serial.println(dropLocation1R); }
 
 EEPROM.get(eeAddressDropLocation2Available, eePromIntVar);
-  if (eePromIntVar != 999) {dropLocation2X = 200.00; dropLocation2Y = 0.00; dropLocation2Z = 0.00; dropLocation2R = 0.00; Serial.println("Drop position 2 NOT previously saved, using default values:");
-     Serial.print(" X"); Serial.print(dropLocation2X); Serial.print(" Y"); Serial.print(dropLocation2Y); Serial.print(" Z"); Serial.print(dropLocation2Z); Serial.print(" R"); Serial.println(dropLocation2R);}
+  if (eePromIntVar != 999) {dropLocation2X = 200.00; dropLocation2Y = 0.00; dropLocation2Z = 0.00; dropLocation2R = 0.00; Serial.println(F("Drop position 2 NOT previously saved, using default values:"));
+     Serial.print(F(" X")); Serial.print(dropLocation2X); Serial.print(F(" Y")); Serial.print(dropLocation2Y); Serial.print(F(" Z")); Serial.print(dropLocation2Z); Serial.print(F(" R")); Serial.println(dropLocation2R);}
   if (eePromIntVar == 999) {EEPROM.get(eeAddressDropLocation2X, dropLocation2X); EEPROM.get(eeAddressDropLocation2Y, dropLocation2Y); EEPROM.get(eeAddressDropLocation2Z, dropLocation2Z); EEPROM.get(eeAddressDropLocation2R, dropLocation2R); 
-     Serial.print("Drop location 2 read from EEPROM: X"); Serial.print(dropLocation2X); Serial.print(" Y"); Serial.print(dropLocation2Y); Serial.print(" Z"); Serial.print(dropLocation2Z); Serial.print(" R"); Serial.println(dropLocation2R); }
+     Serial.print(F("Drop location 2 read from EEPROM: X")); Serial.print(dropLocation2X); Serial.print(F(" Y")); Serial.print(dropLocation2Y); Serial.print(F(" Z")); Serial.print(dropLocation2Z); Serial.print(F(" R")); Serial.println(dropLocation2R); }
 
 EEPROM.get(eeAddressDropLocation3Available, eePromIntVar);
-  if (eePromIntVar != 999) {dropLocation3X = 200.00; dropLocation3Y = 0.00; dropLocation3Z = 0.00; dropLocation3R = 0.00; Serial.println("Drop position 3 NOT previously saved, using default values:");
-     Serial.print(" X"); Serial.print(dropLocation3X); Serial.print(" Y"); Serial.print(dropLocation3Y); Serial.print(" Z"); Serial.print(dropLocation3Z); Serial.print(" R"); Serial.println(dropLocation3R);}
+  if (eePromIntVar != 999) {dropLocation3X = 200.00; dropLocation3Y = 0.00; dropLocation3Z = 0.00; dropLocation3R = 0.00; Serial.println(F("Drop position 3 NOT previously saved, using default values:"));
+     Serial.print(F(" X")); Serial.print(dropLocation3X); Serial.print(F(" Y")); Serial.print(dropLocation3Y); Serial.print(F(" Z")); Serial.print(dropLocation3Z); Serial.print(F(" R")); Serial.println(dropLocation3R);}
   if (eePromIntVar == 999) {EEPROM.get(eeAddressDropLocation3X, dropLocation3X); EEPROM.get(eeAddressDropLocation3Y, dropLocation3Y); EEPROM.get(eeAddressDropLocation3Z, dropLocation3Z); EEPROM.get(eeAddressDropLocation3R, dropLocation3R); 
-     Serial.print("Drop location 3 read from EEPROM: X"); Serial.print(dropLocation3X); Serial.print(" Y"); Serial.print(dropLocation3Y); Serial.print(" Z"); Serial.print(dropLocation3Z); Serial.print(" R"); Serial.println(dropLocation3R); }
+     Serial.print(F("Drop location 3 read from EEPROM: X")); Serial.print(dropLocation3X); Serial.print(F(" Y")); Serial.print(dropLocation3Y); Serial.print(F(" Z")); Serial.print(dropLocation3Z); Serial.print(F(" R")); Serial.println(dropLocation3R); }
 
 EEPROM.get(eeAddressEndefectorAvailable, eePromIntVar);
-  if (eePromIntVar != 999) {endeffectorGripper = false; Serial.println("End effector type NOT previously saved, using default: Vacuum Cup");}
-  if (eePromIntVar == 999) {EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print("End effector type read from EEPROM: ");
-      if (endeffectorGripper == 1) {Serial.println("Gripper");} else Serial.println("Vacuum Cup");}
+  if (eePromIntVar != 999) {endeffectorGripper = false; Serial.println(F("End effector type NOT previously saved, using default: Vacuum Cup"));}
+  if (eePromIntVar == 999) {EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print(F("End effector type read from EEPROM: "));
+      if (endeffectorGripper == 1) {Serial.println(F("Gripper"));} else Serial.println(F("Vacuum Cup"));}
 
 
 // end EEPROM load data section*******************************************
@@ -308,7 +308,7 @@ lcd.print("Dobot Pixy2 Demo");
 lcd.setCursor(0,1);
 lcd.print("Press any key");
 // **** initialize PIXY camera *******************************
-Serial.println("pixy.init");
+Serial.println(F("pixy.init"));
 pixy.init();
 // **** setup arduino pins ***********************************
 pinMode(buttonUpPin, INPUT);
@@ -433,13 +433,13 @@ void moveArm(float x, float y, float z, float r, bool vacuumOn)
   gPTPCmd.z = z;
   gPTPCmd.r = r;
 
-Serial.print("move to x:"); Serial.print(gPTPCmd.x); Serial.print(" y:"); Serial.print(gPTPCmd.y); Serial.print(" z:"); Serial.println(gPTPCmd.r);
+Serial.print(F("move to x:")); Serial.print(gPTPCmd.x); Serial.print(F(" y:")); Serial.print(gPTPCmd.y); Serial.print(F(" z:")); Serial.println(gPTPCmd.r);
 
 SetPTPCmd(&gPTPCmd, true, &gQueuedCmdIndex);
 
 if (endeffectorGripper == true) {
   if (vacuumOn == false && vacuumOn != currentVac) {
-      Serial.println("Open GRIPPER");
+      Serial.println(F("Open GRIPPER"));
       //delay(1000);
       SetEndEffectorSuctionCup(false, true, &gQueuedCmdIndex);
       ProtocolProcess(); //have command(s) executed by dobot
@@ -621,7 +621,7 @@ do{
   signature1Found = 0; 
   signature2Found = 0; 
   signature3Found = 0;
-  Serial.print("pixy.ccc.numBlocks = "); Serial.println(pixy.ccc.numBlocks);
+  Serial.print(F("pixy.ccc.numBlocks = ")); Serial.println(pixy.ccc.numBlocks);
   for (i=0; i<pixy.ccc.numBlocks; i++){ 
   if (pixy.ccc.blocks[i].m_signature == signaturePart1){signature1Found++; j = i; activeSignature = 1; //check if signature is a part 1 signature and set j counter to array address if true;
   pixy.ccc.blocks[i].print();} //print found signature on serial monitor
@@ -633,32 +633,32 @@ do{
 if (signature1Found > 0 || signature2Found > 0 || signature3Found > 0) {
   pixyPartX = pixy.ccc.blocks[j].m_x; //Select first part found in array
   pixyPartY = pixy.ccc.blocks[j].m_y;
-Serial.println("The following part will be picked:");
+Serial.println(F("The following part will be picked:"));
 pixy.ccc.blocks[j].print();
-Serial.print("pixyPartX: "); Serial.println(pixyPartX);
-Serial.print("pixyPartY: "); Serial.println(pixyPartY);
+Serial.print(F("pixyPartX: ")); Serial.println(pixyPartX);
+Serial.print(F("pixyPartY: ")); Serial.println(pixyPartY);
  //Flip Y axis (Pixy Y=0 is at the top of the image with positive direction downwards, while Dobot Y=0 is at the bottom with positive direction upwards)
   pixyPartY = (207 - pixyPartY); // Flip Y coordinate by subtracting it from max pixel number of pixy camera (207 pixels) 
-  Serial.print("pixyPartY: after flipping Y axis with 207 - pixyPartY: "); Serial.println(pixyPartY);
+  Serial.print(F("pixyPartY: after flipping Y axis with 207 - pixyPartY: ")); Serial.println(pixyPartY);
   //calculate scale between sheet and Dobot coordinates   
-  scaleX = (sqrt(sq(b2X-a2X)+sq(b2Y-a2Y)))/(sqrt(sq(b1X-a1X)+sq(b1Y-a1Y)));    Serial.print("scaleX: "); Serial.println(scaleX);
-  scaleY = (sqrt(sq(c2X-a2X)+sq(c2Y-a2Y)))/(sqrt(sq(c1X-a1X)+sq(c1Y-a1Y)));    Serial.print("scaleY: "); Serial.println(scaleY);
-  r1 = (sqrt(sq(b1X-a1X)+sq(b1Y-a1Y)));     Serial.print("r1: "); Serial.println(r1);
-  r2 = (sqrt(sq(b2X-a2X)+sq(b2Y-a2Y)));     Serial.print("r2: "); Serial.println(r2);
+  scaleX = (sqrt(sq(b2X-a2X)+sq(b2Y-a2Y)))/(sqrt(sq(b1X-a1X)+sq(b1Y-a1Y)));    Serial.print(F("scaleX: ")); Serial.println(scaleX);
+  scaleY = (sqrt(sq(c2X-a2X)+sq(c2Y-a2Y)))/(sqrt(sq(c1X-a1X)+sq(c1Y-a1Y)));    Serial.print(F("scaleY: ")); Serial.println(scaleY);
+  r1 = (sqrt(sq(b1X-a1X)+sq(b1Y-a1Y)));     Serial.print(F("r1: ")); Serial.println(r1);
+  r2 = (sqrt(sq(b2X-a2X)+sq(b2Y-a2Y)));     Serial.print(F("r2: ")); Serial.println(r2);
   //translate to origin
-  dobotPartX = pixyPartX - a1X;             Serial.print("dobotPartX after translate to origin: "); Serial.println(dobotPartX);       //translate to origin
-  dobotPartY = pixyPartY - a1Y;             Serial.print("dobotPartY after translate to origin: "); Serial.println(dobotPartY);       //translate to origin 
-  angle1     = (acos((b1X-a1X)/r1));        Serial.print("angle1: "); Serial.println(angle1);                                    //angle between calibration sheet and pixy coordinate system
-  dobotPartX = (dobotPartX*cos(-1*angle1))+(dobotPartY*sin(-1*angle1)); Serial.print("dobotPartX after rotate: "); Serial.println(dobotPartX);//rotate X coordinate from sheet to Pixy coordinate system
-  dobotPartY = ((-1*dobotPartX)*sin(-1*angle1))+(dobotPartY*cos(-1*angle1));  Serial.print("dobotPartY after rotate: "); Serial.println(dobotPartY);//rotate Y coordinate from sheet to Pixy coordinate system
-  dobotPartX = dobotPartX*scaleX;           Serial.print("dobotPartX after scale: "); Serial.println(dobotPartX);                //scale X between Pixy and Dobot
-  dobotPartY = dobotPartY*scaleY;           Serial.print("dobotPartY after scale: "); Serial.println(dobotPartY);                //scale Y between Pixy and Dobot
-  angle2     = (acos((b2X-a2X)/r2));        Serial.print("angle2: "); Serial.println(angle2);                                    //angle between Pixy and Dobot coordinate systems
+  dobotPartX = pixyPartX - a1X;             Serial.print(F("dobotPartX after translate to origin: ")); Serial.println(dobotPartX);       //translate to origin
+  dobotPartY = pixyPartY - a1Y;             Serial.print(F("dobotPartY after translate to origin: ")); Serial.println(dobotPartY);       //translate to origin 
+  angle1     = (acos((b1X-a1X)/r1));        Serial.print(F("angle1: ")); Serial.println(angle1);                                    //angle between calibration sheet and pixy coordinate system
+  dobotPartX = (dobotPartX*cos(-1*angle1))+(dobotPartY*sin(-1*angle1)); Serial.print(F("dobotPartX after rotate: ")); Serial.println(dobotPartX);//rotate X coordinate from sheet to Pixy coordinate system
+  dobotPartY = ((-1*dobotPartX)*sin(-1*angle1))+(dobotPartY*cos(-1*angle1));  Serial.print(F("dobotPartY after rotate: ")); Serial.println(dobotPartY);//rotate Y coordinate from sheet to Pixy coordinate system
+  dobotPartX = dobotPartX*scaleX;           Serial.print(F("dobotPartX after scale: ")); Serial.println(dobotPartX);                //scale X between Pixy and Dobot
+  dobotPartY = dobotPartY*scaleY;           Serial.print(F("dobotPartY after scale: ")); Serial.println(dobotPartY);                //scale Y between Pixy and Dobot
+  angle2     = (acos((b2X-a2X)/r2));        Serial.print(F("angle2: ")); Serial.println(angle2);                                    //angle between Pixy and Dobot coordinate systems
   intermediateX = dobotPartX; intermediateY = dobotPartY;               // write to intermediate variable to avoid miscalculation in next step
-  dobotPartX = (intermediateX*cos(angle2))+(intermediateY*sin(angle2));       Serial.print("dobotPartX after rotate to Dobot coordinate system: "); Serial.println(dobotPartX);// rotate X coordinate to Dobot coordinate system
-  dobotPartY = ((-1*intermediateX)*sin(angle2))+(intermediateY*cos(angle2));  Serial.print("dobotPartY dobotPartX after rotate to Dobot coordinate system: "); Serial.println(dobotPartY);// rotate Y coordinate to Dobot coordinate system
-  dobotPartX = dobotPartX + a2X;            Serial.print("dobotPartX after translate: "); Serial.println(dobotPartX);           //translate from origin to destination
-  dobotPartY = dobotPartY + a2Y;            Serial.print("dobotPartY after translate: "); Serial.println(dobotPartY);           //translate from origin to destination
+  dobotPartX = (intermediateX*cos(angle2))+(intermediateY*sin(angle2));       Serial.print(F("dobotPartX after rotate to Dobot coordinate system: ")); Serial.println(dobotPartX);// rotate X coordinate to Dobot coordinate system
+  dobotPartY = ((-1*intermediateX)*sin(angle2))+(intermediateY*cos(angle2));  Serial.print(F("dobotPartY dobotPartX after rotate to Dobot coordinate system: ")); Serial.println(dobotPartY);// rotate Y coordinate to Dobot coordinate system
+  dobotPartX = dobotPartX + a2X;            Serial.print(F("dobotPartX after translate: ")); Serial.println(dobotPartX);           //translate from origin to destination
+  dobotPartY = dobotPartY + a2Y;            Serial.print(F("dobotPartY after translate: ")); Serial.println(dobotPartY);           //translate from origin to destination
 
 lcd.setCursor(0,1); lcd.print("                ");
 lcd.setCursor(0,1); lcd.print("X"); lcd.setCursor(1,1); lcd.print(dobotPartX);
@@ -698,9 +698,9 @@ switch (activeSignature) {
 
 
 else {
-  Serial.println(" ");
-  Serial.print("Error: no parts found, at least 1 part required to start pick and place action.");
-  Serial.println("Pick and Place aborted");
+  Serial.println(F(" "));
+  Serial.print(F("Error: no parts found, at least 1 part required to start pick and place action."));
+  Serial.println(F("Pick and Place aborted"));
   lcd.setCursor(0,1); lcd.print("ZERO parts found"); 
   }
   //delay(3000);
@@ -746,33 +746,33 @@ switch (lcd_key)
   if (menuChoice == 1) {lcd.setCursor(0,1); lcd.print("Cal Pos stored! ");
   calXpos = gPTPCmd.x; calYpos = gPTPCmd.y; calZpos = gPTPCmd.z; calRpos = gPTPCmd.r;
 
-EEPROM.put(eeAddressCalXpos, calXpos); EEPROM.get(eeAddressCalXpos, calXpos); Serial.print("calXpos stored in eeprom: "); Serial.println(calXpos);
-EEPROM.put(eeAddressCalYpos, calYpos); EEPROM.get(eeAddressCalYpos, calYpos); Serial.print("calYpos stored in eeprom ");  Serial.println(calYpos);
-EEPROM.put(eeAddressCalZpos, calZpos); EEPROM.get(eeAddressCalZpos, calZpos); Serial.print("calZpos stored in eeprom ");  Serial.println(calZpos);
-EEPROM.put(eeAddressCalRpos, calRpos); EEPROM.get(eeAddressCalRpos, calRpos); Serial.print("calRpos stored in eeprom");   Serial.println(calRpos);
+EEPROM.put(eeAddressCalXpos, calXpos); EEPROM.get(eeAddressCalXpos, calXpos); Serial.print(F("calXpos stored in eeprom: ")); Serial.println(calXpos);
+EEPROM.put(eeAddressCalYpos, calYpos); EEPROM.get(eeAddressCalYpos, calYpos); Serial.print(F("calYpos stored in eeprom "));  Serial.println(calYpos);
+EEPROM.put(eeAddressCalZpos, calZpos); EEPROM.get(eeAddressCalZpos, calZpos); Serial.print(F("calZpos stored in eeprom "));  Serial.println(calZpos);
+EEPROM.put(eeAddressCalRpos, calRpos); EEPROM.get(eeAddressCalRpos, calRpos); Serial.print(F("calRpos stored in eeprom"));   Serial.println(calRpos);
 EEPROM.put(eeAddressCalPosAvailable, 999); // setting this address to 999 means calibration position has been stored and and can be safely retreived when arduino restarts.
-EEPROM.get(eeAddressCalPosAvailable, eePromIntVar); Serial.print("calPosAvailable stored in EEPROM: "); Serial.println(eePromIntVar);
+EEPROM.get(eeAddressCalPosAvailable, eePromIntVar); Serial.print(F("calPosAvailable stored in EEPROM: ")); Serial.println(eePromIntVar);
   
   }
   if (menuChoice == 2) {lcd.setCursor(0,1); lcd.print("Now in Cal Pos! ");
   moveArm(calXpos, calYpos, calZpos, currentR, currentVac);
   }
   if (menuChoice == 3) { EEPROM.put (eeAddressZdown, gPTPCmd.z); EEPROM.put (eeAddressZdownAvailable, 999); 
-  EEPROM.get(eeAddressZdown, zDownPos); Serial.print("Z-Down stored in eeprom: Z"); Serial.println(zDownPos); 
+  EEPROM.get(eeAddressZdown, zDownPos); Serial.print(F("Z-Down stored in eeprom: Z")); Serial.println(zDownPos); 
   lcd.setCursor(0,1); lcd.print("Z-down set!     ");
   }
   if (menuChoice == 4) {lcd.setCursor(0,1); lcd.print("Now in Z-down!  ");
   moveArm(currentX, currentY, zDownPos, currentR, currentVac);
   }
 if (menuChoice == 5) { EEPROM.put (eeAddressA2x, gPTPCmd.x); EEPROM.put (eeAddressA2y, gPTPCmd.y); EEPROM.put (eeAddressA2Available, 999); 
-  EEPROM.get(eeAddressA2x, a2X); Serial.print("a2X stored in eeprom: "); Serial.println(a2X); EEPROM.get(eeAddressA2y, a2Y); Serial.print("a2Y stored in eeprom: "); Serial.println(a2Y);
+  EEPROM.get(eeAddressA2x, a2X); Serial.print("a2X stored in eeprom: "); Serial.println(a2X); EEPROM.get(eeAddressA2y, a2Y); Serial.print(F("a2Y stored in eeprom: ")); Serial.println(a2Y);
   lcd.setCursor(0,1); lcd.print("A_xy set!       ");
   }
   if (menuChoice == 6) {lcd.setCursor(0,1); lcd.print("Now in A_xy!    ");
   moveArm(a2X, a2Y, currentZ, currentR, currentVac);
   }
   if (menuChoice == 7) {EEPROM.put (eeAddressB2x, gPTPCmd.x); EEPROM.put (eeAddressB2y, gPTPCmd.y); EEPROM.put (eeAddressB2Available, 999);
-  EEPROM.get(eeAddressB2x, b2X); Serial.print("b2X stored in eeprom: "); Serial.println(b2X); EEPROM.get(eeAddressB2y, b2Y); Serial.print("b2Y stored in eeprom: "); Serial.println(b2Y);
+  EEPROM.get(eeAddressB2x, b2X); Serial.print("b2X stored in eeprom: "); Serial.println(b2X); EEPROM.get(eeAddressB2y, b2Y); Serial.print(F("b2Y stored in eeprom: ")); Serial.println(b2Y);
   lcd.setCursor(0,1); lcd.print("B_xy set!       ");
   
   }
@@ -780,7 +780,7 @@ if (menuChoice == 5) { EEPROM.put (eeAddressA2x, gPTPCmd.x); EEPROM.put (eeAddre
   moveArm(b2X, b2Y, currentZ, currentR, currentVac);
   }
   if (menuChoice == 9) {EEPROM.put (eeAddressC2x, gPTPCmd.x); EEPROM.put (eeAddressC2y, gPTPCmd.y); EEPROM.put (eeAddressC2Available, 999);
-  EEPROM.get(eeAddressC2x, c2X); Serial.print("c2X stored in eeprom: "); Serial.println(c2X); EEPROM.get(eeAddressC2y, c2Y); Serial.print("c2Y stored in eeprom: "); Serial.println(c2Y);
+  EEPROM.get(eeAddressC2x, c2X); Serial.print("c2X stored in eeprom: "); Serial.println(c2X); EEPROM.get(eeAddressC2y, c2Y); Serial.print(F("c2Y stored in eeprom: ")); Serial.println(c2Y);
   lcd.setCursor(0,1); lcd.print("C_xy set!       ");
   
   }
@@ -789,8 +789,8 @@ if (menuChoice == 5) { EEPROM.put (eeAddressA2x, gPTPCmd.x); EEPROM.put (eeAddre
   }
 
   if (menuChoice == 11) {EEPROM.put (eeAddressStartPosX, gPTPCmd.x); EEPROM.put (eeAddressStartPosY, gPTPCmd.y); EEPROM.put (eeAddressStartPosZ, gPTPCmd.z); EEPROM.put (eeAddressStartPosR, gPTPCmd.r); EEPROM.put (eeAddressStartPosAvailable, 999);
-  EEPROM.get(eeAddressStartPosX, startPosX); Serial.print("startPosX stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressStartPosY, startPosY); Serial.print("startPosY stored in eeprom: "); Serial.println(startPosY);
-  EEPROM.get(eeAddressStartPosZ, startPosZ); Serial.print("startPosZ stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressStartPosR, startPosR); Serial.print("startPosR stored in eeprom: "); Serial.println(startPosR);
+  EEPROM.get(eeAddressStartPosX, startPosX); Serial.print("startPosX stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressStartPosY, startPosY); Serial.print(F("startPosY stored in eeprom: ")); Serial.println(startPosY);
+  EEPROM.get(eeAddressStartPosZ, startPosZ); Serial.print("startPosZ stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressStartPosR, startPosR); Serial.print(F("startPosR stored in eeprom: ")); Serial.println(startPosR);
   lcd.setCursor(0,1); lcd.print("Start stored!   ");
   }
 
@@ -800,8 +800,8 @@ if (menuChoice == 5) { EEPROM.put (eeAddressA2x, gPTPCmd.x); EEPROM.put (eeAddre
 
 if (menuChoice == 13) {EEPROM.put (eeAddressDropLocation1X , gPTPCmd.x); EEPROM.put (eeAddressDropLocation1Y , gPTPCmd.y); EEPROM.put (eeAddressDropLocation1Z , gPTPCmd.z); EEPROM.put (eeAddressDropLocation1R , gPTPCmd.r); 
   EEPROM.put (eeAddressDropLocation1Available , 999);
-  EEPROM.get(eeAddressDropLocation1X, dropLocation1X); Serial.print("Drop location1 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation1Y, dropLocation1Y); Serial.print("Drop location1 Y stored in eeprom: "); Serial.println(startPosY);
-  EEPROM.get(eeAddressDropLocation1Z, dropLocation1Z); Serial.print("Drop location1 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation1R, dropLocation1R); Serial.print("Drop location1 R stored in eeprom: "); Serial.println(startPosR);
+  EEPROM.get(eeAddressDropLocation1X, dropLocation1X); Serial.print("Drop location1 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation1Y, dropLocation1Y); Serial.print(F("Drop location1 Y stored in eeprom: ")); Serial.println(startPosY);
+  EEPROM.get(eeAddressDropLocation1Z, dropLocation1Z); Serial.print("Drop location1 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation1R, dropLocation1R); Serial.print(F("Drop location1 R stored in eeprom: ")); Serial.println(startPosR);
   lcd.setCursor(0,1); lcd.print("DropPos1 stored!");
   }
 
@@ -811,8 +811,8 @@ if (menuChoice == 13) {EEPROM.put (eeAddressDropLocation1X , gPTPCmd.x); EEPROM.
 
 if (menuChoice == 15) {EEPROM.put (eeAddressDropLocation2X , gPTPCmd.x); EEPROM.put (eeAddressDropLocation2Y , gPTPCmd.y); EEPROM.put (eeAddressDropLocation2Z , gPTPCmd.z); EEPROM.put (eeAddressDropLocation2R , gPTPCmd.r); 
   EEPROM.put (eeAddressDropLocation2Available , 999);
-  EEPROM.get(eeAddressDropLocation2X, dropLocation2X); Serial.print("Drop location2 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation2Y, dropLocation2Y); Serial.print("Drop location2 Y stored in eeprom: "); Serial.println(startPosY);
-  EEPROM.get(eeAddressDropLocation2Z, dropLocation2Z); Serial.print("Drop location2 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation2R, dropLocation2R); Serial.print("Drop location2 R stored in eeprom: "); Serial.println(startPosR);
+  EEPROM.get(eeAddressDropLocation2X, dropLocation2X); Serial.print("Drop location2 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation2Y, dropLocation2Y); Serial.print(F("Drop location2 Y stored in eeprom: ")); Serial.println(startPosY);
+  EEPROM.get(eeAddressDropLocation2Z, dropLocation2Z); Serial.print("Drop location2 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation2R, dropLocation2R); Serial.print(F("Drop location2 R stored in eeprom: ")); Serial.println(startPosR);
   lcd.setCursor(0,1); lcd.print("DropPos2 stored!");
   }
 
@@ -822,8 +822,8 @@ if (menuChoice == 15) {EEPROM.put (eeAddressDropLocation2X , gPTPCmd.x); EEPROM.
 
 if (menuChoice == 17) {EEPROM.put (eeAddressDropLocation3X , gPTPCmd.x); EEPROM.put (eeAddressDropLocation3Y , gPTPCmd.y); EEPROM.put (eeAddressDropLocation3Z , gPTPCmd.z); EEPROM.put (eeAddressDropLocation3R , gPTPCmd.r); 
   EEPROM.put (eeAddressDropLocation3Available , 999);
-  EEPROM.get(eeAddressDropLocation3X, dropLocation3X); Serial.print("Drop location3 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation3Y, dropLocation3Y); Serial.print("Drop location3 Y stored in eeprom: "); Serial.println(startPosY);
-  EEPROM.get(eeAddressDropLocation3Z, dropLocation3Z); Serial.print("Drop location3 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation3R, dropLocation3R); Serial.print("Drop location3 R stored in eeprom: "); Serial.println(startPosR);
+  EEPROM.get(eeAddressDropLocation3X, dropLocation3X); Serial.print("Drop location3 X stored in eeprom: "); Serial.println(startPosX); EEPROM.get(eeAddressDropLocation3Y, dropLocation3Y); Serial.print(F("Drop location3 Y stored in eeprom: ")); Serial.println(startPosY);
+  EEPROM.get(eeAddressDropLocation3Z, dropLocation3Z); Serial.print("Drop location3 Z stored in eeprom: "); Serial.println(startPosZ); EEPROM.get(eeAddressDropLocation3R, dropLocation3R); Serial.print(F("Drop location3 R stored in eeprom: ")); Serial.println(startPosR);
   lcd.setCursor(0,1); lcd.print("DropPos3 stored!");
   }
 
@@ -850,7 +850,7 @@ if (menuChoice == 19) {lcd.setCursor(0,1); lcd.print("Calib started   ");
   pixy.ccc.getBlocks();
 
 CalibDotFound = 0;
-Serial.print("pixy.ccc.numBlocks = "); Serial.println(pixy.ccc.numBlocks);
+Serial.print(F("pixy.ccc.numBlocks = ")); Serial.println(pixy.ccc.numBlocks);
 for (i=0; i<pixy.ccc.numBlocks; i++){ 
   if (pixy.ccc.blocks[i].m_signature == signatureCalib){CalibDotFound++;} //check if signature is a calibration dot and add to counter if true
   pixy.ccc.blocks[i].print(); //print found signature on serial monitor
@@ -859,14 +859,14 @@ for (i=0; i<pixy.ccc.numBlocks; i++){
   // If there are blocks detected, print them!
   if (CalibDotFound == 3)
   {
-    Serial.print("Detected ");
+    Serial.print(F("Detected "));
     Serial.println(pixy.ccc.numBlocks);
     for (i=0; i<pixy.ccc.numBlocks; i++)
     {
-      //Serial.print("Part Signature: "); Serial.println(pixyPartSignature);
-      Serial.print("  block ");
+      //Serial.print(F("Part Signature: ")); Serial.println(pixyPartSignature);
+      Serial.print(F("  block "));
       Serial.print(i);
-      Serial.print(": ");
+      Serial.print(F(": "));
       pixy.ccc.blocks[i].print();
       }
     //sort array with found blocks from smallest to largest
@@ -902,25 +902,25 @@ for (i=0; i<pixy.ccc.numBlocks; i++){
     }
     //}
 
-      Serial.println(" ");
-      Serial.println("3 Calibration points found. Writing to EEPROM:");
+      Serial.println(F(" "));
+      Serial.println(F("3 Calibration points found. Writing to EEPROM:"));
 
       EEPROM.put (eeAddressA1x, a1X); EEPROM.put (eeAddressA1y, a1Y); EEPROM.put (eeAddressA1Available, 999); 
-      EEPROM.get(eeAddressA1x, a1X); Serial.print("a1X stored in eeprom: "); Serial.println(a1X); EEPROM.get(eeAddressA1y, a1Y); Serial.print("a1Y stored in eeprom: "); Serial.println(a1Y);
+      EEPROM.get(eeAddressA1x, a1X); Serial.print("a1X stored in eeprom: "); Serial.println(a1X); EEPROM.get(eeAddressA1y, a1Y); Serial.print(F("a1Y stored in eeprom: ")); Serial.println(a1Y);
 
       EEPROM.put (eeAddressB1x, b1X); EEPROM.put (eeAddressB1y, b1Y); EEPROM.put (eeAddressB1Available, 999);
-      EEPROM.get(eeAddressB1x, b1X); Serial.print("b1X stored in eeprom: "); Serial.println(b1X); EEPROM.get(eeAddressB1y, b1Y); Serial.print("b1Y stored in eeprom: "); Serial.println(b1Y);
+      EEPROM.get(eeAddressB1x, b1X); Serial.print("b1X stored in eeprom: "); Serial.println(b1X); EEPROM.get(eeAddressB1y, b1Y); Serial.print(F("b1Y stored in eeprom: ")); Serial.println(b1Y);
 
       EEPROM.put (eeAddressC1x, c1X); EEPROM.put (eeAddressC1y, c1Y); EEPROM.put (eeAddressC1Available, 999);
-      EEPROM.get(eeAddressC1x, c1X); Serial.print("c1X stored in eeprom: "); Serial.println(c1X); EEPROM.get(eeAddressC1y, c1Y); Serial.print("c1Y stored in eeprom: "); Serial.println(c1Y);
+      EEPROM.get(eeAddressC1x, c1X); Serial.print("c1X stored in eeprom: "); Serial.println(c1X); EEPROM.get(eeAddressC1y, c1Y); Serial.print(F("c1Y stored in eeprom: ")); Serial.println(c1Y);
 
     
   lcd.setCursor(0,1); lcd.print("Calib. done!    "); 
 }  
   else{
-    Serial.println(" ");
-    Serial.print("Error: incorrect numer of blocks found (3 required, found: "); Serial.println(CalibDotFound);
-    Serial.println("Calibration aborted");
+    Serial.println(F(" "));
+    Serial.print(F("Error: incorrect numer of blocks found (3 required, found: ")); Serial.println(CalibDotFound);
+    Serial.println(F("Calibration aborted"));
     lcd.setCursor(0,1); lcd.print("Calib. FAILED   "); 
   }
 
@@ -930,13 +930,13 @@ for (i=0; i<pixy.ccc.numBlocks; i++){
   if (menuChoice == 20) {
     if (endeffectorGripper == true) {endeffectorGripper = false; lcd.setCursor(0,1); lcd.print("Vacuum Cup set! ");
   EEPROM.put (eeAddressEndeffector , endeffectorGripper); EEPROM.put (eeAddressEndefectorAvailable , 999);
-  EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print("End effector type stored in eeprom: "); 
-  Serial.print(endeffectorGripper); Serial.println("( Gripper)");  
+  EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print(F("End effector type stored in eeprom: ")); 
+  Serial.print(endeffectorGripper); Serial.println(F("( Gripper)"));  
     }
     else {endeffectorGripper = true; lcd.setCursor(0,1); lcd.print("Gripper set!    ");
   EEPROM.put (eeAddressEndeffector , endeffectorGripper); EEPROM.put (eeAddressEndefectorAvailable , 999);
-  EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print("End effector type stored in eeprom: "); 
-  Serial.print(endeffectorGripper); Serial.println("( Vacuum Cup)"); }
+  EEPROM.get(eeAddressEndeffector, endeffectorGripper); Serial.print(F("End effector type stored in eeprom: ")); 
+  Serial.print(endeffectorGripper); Serial.println(F("( Vacuum Cup)")); }
   }
   
 prevKeyState = 1;  }
@@ -995,7 +995,6 @@ prevKeyState = 0;
    downButtonState = digitalRead(buttonDownPin);
    leftButtonState = digitalRead(buttonLeftPin);
    rightButtonState = digitalRead(buttonRightPin);
-
  if ((button1State != prevButton1State) && (button1State == HIGH))
  {
   int i; 
@@ -1007,23 +1006,22 @@ pixyPartX = pixy.ccc.blocks[j].m_x;
 pixyPartY = pixy.ccc.blocks[j].m_y;
 partWidth = pixy.ccc.blocks[j].m_width;
 partHeight = pixy.ccc.blocks[j].m_height;
-
   
   // If there are blocks detected, print them!
   if (pixy.ccc.numBlocks)
   {
-    Serial.print("Detected ");
+    Serial.print(F("Detected "));
     Serial.println(pixy.ccc.numBlocks);
     for (i=0; i<pixy.ccc.numBlocks; i++)
     {
-      Serial.print("Part Signature: "); Serial.println(pixyPartSignature);
-      Serial.print(" pixyPartX: "); Serial.print(pixyPartX);
-      Serial.print(" pixyPartY: "); Serial.print(pixyPartY);
-      Serial.print(" partWidth: "); Serial.print(partWidth);
-      Serial.print(" partHeight: "); Serial.println(partHeight);
-      Serial.print("  block ");
+      Serial.print(F("Part Signature: ")); Serial.println(pixyPartSignature);
+      Serial.print(F(" pixyPartX: ")); Serial.print(pixyPartX);
+      Serial.print(F(" pixyPartY: ")); Serial.print(pixyPartY);
+      Serial.print(F(" partWidth: ")); Serial.print(partWidth);
+      Serial.print(F(" partHeight: ")); Serial.println(partHeight);
+      Serial.print(F("  block "));
       Serial.print(i);
-      Serial.print(": ");
+      Serial.print(F(": "));
       pixy.ccc.blocks[i].print();
       //start test move robot arm to x location of found block ****************************************************
       //gPTPCmd.x = partX;
@@ -1032,33 +1030,28 @@ partHeight = pixy.ccc.blocks[j].m_height;
     }
   }  
  }
-
 revButton1State = button1State;
-
 if ((upButtonState != prevUpButtonState) && (upButtonState == HIGH))
 {
-Serial.println("Up button Pressed");
+Serial.println(F("Up button Pressed"));
 moveArm((gPTPCmd.x += 10), currentY, currentZ, currentR, currentVac);
 }
 prevUpButtonState = upButtonState;
-
 if ((downButtonState != prevDownButtonState) && (downButtonState == HIGH))
 {
-Serial.println("Down button Pressed");
+Serial.println(F("Down button Pressed"));
 moveArm((gPTPCmd.x -= 10), currentY, currentZ, currentR, currentVac);
 }
 prevDownButtonState = downButtonState;
-
 if ((leftButtonState != prevLeftButtonState) && (leftButtonState == HIGH))
 {
-Serial.println("Left button Pressed");
+Serial.println(F("Left button Pressed"));
 moveArm(currentX, (gPTPCmd.y += 10), currentZ, currentR, currentVac);
 }
 prevLeftButtonState = leftButtonState;
-
 if ((rightButtonState != prevRightButtonState) && (rightButtonState == HIGH))
 {
-Serial.println("Right button Pressed");
+Serial.println(F("Right button Pressed"));
 moveArm(currentX, (gPTPCmd.y -= 10), currentZ, currentR, currentVac);
 }
 prevRightButtonState = rightButtonState;
@@ -1068,3 +1061,5 @@ delay(10);
 
     }     // end infinite loop
 }   
+
+ 
